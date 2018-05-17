@@ -1,0 +1,131 @@
+<div class="list-post">
+  <div class="container-fluid text-center post-part">
+    <%= render 'form' %>
+  </div>
+  <hr class="bg-white" />
+  <div class="container-fluid">
+    <div class="row ">
+      <% @posts.each do |p| %>
+        <div class="card col-8 offset-2">
+          <div class="card-header">
+            <div class="container">
+              <div class="row">
+                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 ml-3 ml-sm-3 card-header-image">
+                  <div class="user-avatar"><%= gravatar_for p.user %></div>
+                </div>
+                <div class="col-5 col-sm-7 col-md-8 col-lg-8 col-xl-9 mr-0 mr-sm-5 ml-0 ml-sm-0 ml-md-3 card-header-user">
+                  <div class="container">
+                    <div class="row mt-3">
+                      <span class="user-name font-weight-bold"><%= p.user.name %></span>
+                    </div>
+                    <div class="row">
+                      <span class="user-name text-muted"><%= p.user.email %></span>
+                      <span id="post_number_<%=p.id%>" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% if @post_edit.nil? %>
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold"><%= p.title %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(p.created_at) %> ago</h6>
+            <p class="card-text"><%= p.content %></p>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-4 comment-btn">
+                <a class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
+              </div>
+              <div class="col-4 edit-btn">
+                <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
+                <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
+                <% end %>
+              </div>
+              <div class="col-4 delete-btn">
+                <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
+                <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="card-body hidden-comment-block">
+            test
+          </div>
+          <% elsif @post_edit.id == p.id %>
+          <%= form_for(@post_edit, url: post_path , method: :put) do |f| %>
+          <div class="card-body">
+            <%= f.hidden_field :id_post, value: @post_edit.id, class: "form-control" %>
+            <%= f.hidden_field :user_id, value: @post_edit.user.id,  class: "form-control" %>
+            <h6 class="card-subtitle mb-2 text-muted">Last update:&nbsp;<%= time_ago_in_words(p.updated_at) %> ago</h6>
+            <%= f.text_field :title, value: @post_edit.title, class: "card-title font-weight-bold form-control" %>
+            <%= f.text_area :content, value: @post_edit.content, class: "form-control card-text" %>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-4 save-btn">
+                <button type="submit" class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-floppy-o"></i>&nbsp;<span class="hide-action">Save</span></button>
+              </div>
+              <% end %>
+              <div class="col-4 edit-btn">
+                <%= link_to( posts_path(:anchor => 'post_number_' + @post_edit.id.to_s) , class: 'card-link btn btn-toolbar justify-content-center') do %>
+                <i class="fa fa-times"></i>&nbsp;<span class="hide-action">Cancel</span>
+                <% end %>
+              </div>
+              <div class="col-4 delete-btn">
+                <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
+                <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% else %>
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold"><%= p.title %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(p.created_at) %> ago</h6>
+            <p class="card-text"><%= p.content %></p>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-4 comment-btn">
+                <a href="#" class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
+              </div>
+              <div class="col-4 edit-btn">
+                <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
+                <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
+                <% end %>
+              </div>
+              <div class="col-4 delete-btn">
+                <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
+                <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="card-body hidden-comment-block">
+            test
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+<% if !@post_edit.nil? %>
+  url_test = window.location.href;
+  window.location = url_test.includes("#edit_post_<%= @post_edit.id %>")? url_test : url_test + "#edit_post_<%= @post_edit.id %>";
+<% end %>
+$(document).ready(function(e){
+  // $('.comment-btn').off();
+  // $('.comment-btn').click(function(){
+  //   console.log( $(this).closest('.card').find('.hidden-comment-block'));
+  //     if ($(this).closest('.card').find('.hidden-comment-block').attr(""))
+  //     $(this).closest('.card').find('.show-comment-block')
+  //     });
+  $('.comment-btn').on('click',function(){
+    $(this).closest('.card').find('.hidden-comment-block').toggle(swing);
+  });
+});
+</script>

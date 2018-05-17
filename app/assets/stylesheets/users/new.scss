@@ -1,0 +1,26 @@
+.signup{
+  .jumbotron{
+    background-image: url("Books_for_Wanderers_Featured.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: auto;
+    min-height: 500px;
+    margin:0;
+  }
+
+  .replace-form-title{
+    display: none;
+  }
+
+  @media(max-width: 550px){
+    .title-form{
+      display: none;
+    }
+
+    .replace-form-title {
+      display: inline;
+    }
+  }
+}

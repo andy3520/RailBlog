@@ -1,0 +1,18 @@
+<% provide(:title, 'Sign up') %>
+<% if logged_in? %>
+  <script type="text/javascript">
+    window.location.href="<%= user_path(current_user) %>"
+  </script>
+<% else %>
+  <div class="signup">
+    <div class="jumbotron">
+      <div class="container align-self-center text-center form-group">
+        <h1 class="title-form text-uppercase">Share your idea, your feeling</h1>
+        <h1 class="title-form text-uppercase font-weight-bold">Understand each other</h1>
+        <h6 class="replace-form-title text-uppercase ">Share your idea, your feeling</h6><br class="replace-form-title" />
+        <h5 class="replace-form-title text-uppercase font-weight-bold">Understand each other</h5>
+        <%= render "form" %>
+      </div>
+    </div>
+  </div>
+<% end %>

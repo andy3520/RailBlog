@@ -1,0 +1,27 @@
+.custom-navbar{
+  height: 120px;
+
+  background: #fff;
+  .navbrand-color{
+  	color: $theme-color;
+  }
+  div.icon-nav>a:hover{
+    text-decoration: none;
+  }
+  .brand-postition{
+    margin-left: -10px;
+  }
+  .brand-postition:hover{
+    color:$theme-color;
+  }
+
+  .navbar-brand{
+    font-size: 30px;
+  }
+
+  @media  (max-width: 341px){
+    .navbar-brand{
+      display: none;
+    }
+  }
+}

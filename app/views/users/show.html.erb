@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <% provide(:title, @user.name) %>
+  <h1>User detail</h1>
+  <%= gravatar_for @user %>
+  <br>
+  <%= @user.name %>
+  <br>
+  <%= @user.email %>
+<% else %>
+  <script type="text/javascript">
+    window.location.href="<%= root_path %>"
+  </script>
+<% end %>

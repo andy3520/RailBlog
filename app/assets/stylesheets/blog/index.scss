@@ -1,0 +1,30 @@
+// Place all the styles related to the Blog controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.mainpage{
+  .jumbotron{
+    background-image: url("Books_for_Wanderers_Featured.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: auto;
+    min-height: 500px;
+    margin:0;
+  }
+  .replace-form-title{
+    display: none;
+  }
+
+  @media(max-width: 550px){
+    .title-form{
+      display: none;
+    }
+
+    .replace-form-title {
+      display: inline;
+    }
+  }
+
+}
+

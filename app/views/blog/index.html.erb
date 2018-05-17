@@ -1,0 +1,17 @@
+<% if logged_in? %>
+  <script type="text/javascript">
+    window.location.href="<%= user_path(current_user) %>"
+  </script>
+<% else %>
+  <div class="mainpage">
+    <div class="jumbotron">
+      <div class="container align-self-center text-center form-group">
+        <h1 class="title-form text-uppercase">welcome back, sign in with your</h1>
+        <h1 class="title-form text-uppercase font-weight-bold">Viblog account</h1>
+        <h3 class="replace-form-title text-uppercase ">welcome back, sign in with your</h3><br class="replace-form-title" />
+        <h2 class="replace-form-title text-uppercase font-weight-bold">Viblog account</h2>
+        <%= render "sessions/form" %>
+      </div>
+    </div>
+  </div>
+<% end %>

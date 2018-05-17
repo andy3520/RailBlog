@@ -1,0 +1,44 @@
+<nav class="navbar navbar-light custom-navbar">
+  <div class="container">
+    <h1>
+      <div class="icon-nav">
+        <% if logged_in? %>
+            <%= link_to posts_path do  %>
+            <div>
+              <%= image_tag("Vinova_favicon.png", class: "img-fluid") %>
+              <div class="navbar-brand navbrand-color font-weight-bold brand-postition">IBLOG</div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to root_path do  %>
+            <div>
+              <%= image_tag("Vinova_favicon.png", class: "img-fluid") %>
+              <div class="navbar-brand navbrand-color font-weight-bold brand-postition">IBLOG</div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </h1>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <% if logged_in? %>
+          <div class="dropdown">
+            <button class="btn btn-danger btn-lg text-uppercase dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name %>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Change password</a>
+              <%= link_to "Log out", logout_path, class: "dropdown-item", method: :delete %>
+            </div>
+          </div>
+        <% else %>
+          <% if controller_name == 'blog' || controller_name == 'sessions' %>
+            <a class="nav-link" href="<%= signup_path %>"><button type="button" class="btn btn-danger btn-lg text-uppercase"><b>Sign up</b></button></a>
+          <% elsif controller_name == 'users' %>
+            <a class="nav-link" href="<%= root_path %>"><button type="button" class="btn btn-danger btn-lg text-uppercase"><b>Sign in</b></button></a>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+</nav>

@@ -1,0 +1,75 @@
+.list-post{
+  $content-background: #212529;
+  background-image: url("beautiful-red-tone-sunrise-snow-trees-ak-2048x1152.jpg");
+  background-size: cover;
+  min-height: 1000px;
+  .post-part{
+    background-size: cover;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .card{
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .gravatar{
+    border-radius: 50%;
+  }
+
+  .user-avatar{
+    width: 70px;
+    height: 70px;
+  }
+
+  a.btn-toolbar{
+    padding:0;
+  }
+
+  .card-header{
+    padding: 0;
+    background-color: #fff;
+  }
+
+  .card-header-user{
+    padding-left:0;
+    padding-right:0;
+  }
+
+  .card-header-image{
+    padding:5px 0 5px 0;
+  }
+
+  .comment-btn{
+    padding-right:0;
+    color: #007bff;
+  }
+
+  .edit-btn{
+    padding:0;
+  }
+.show-comment-block
+  .delete-btn{
+    padding-left:0;
+    color: #007bff;
+  }
+
+  .save-btn button{
+    color: #007bff;
+    background-color: transparent;
+    padding:0;
+    margin: 0;
+  }
+
+  .hidden-comment-block{
+    display: none;
+    z-index: 1000;
+    position: sticky;
+  }
+  @media(max-width: 498px){
+    .hide-action{
+      display: none;
+    }
+  }
+}
