@@ -1,0 +1,48 @@
+<div class="card col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
+  <div class="card-header">
+    <div class="container">
+      <div class="row">
+        <div class="justify-content-start ml-3">
+          <span id="post_number_<%=p.id%>" />
+            <div class="user-avatar"><%= gravatar_for p.user %></div>
+          </div>
+          <div class="justify-content-start ml-2">
+            <div class="container">
+              <div class="row mt-3">
+                <span class="user-name font-weight-bold"><%= p.user.name %></span>
+              </div>
+              <div class="row">
+                <span class="user-name text-muted"><%= p.user.email %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title font-weight-bold"><%= p.title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(p.created_at) %> ago</h6>
+      <p class="card-text"><%= p.content %></p>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-4 comment-btn">
+          <%= link_to new_comment_path, remote: true do %>
+          <a class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
+          <% end %>
+        </div>
+        <div class="col-4 edit-btn">
+          <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
+          <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
+          <% end %>
+        </div>
+        <div class="col-4 delete-btn">
+          <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
+          <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="card-body hidden-comment-block">
+    </div>
+  </div>

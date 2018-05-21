@@ -1,0 +1,15 @@
+<% p.comments.each do |c| %>
+  <% if c.user.present? %>
+    <div class="container">
+      <div class="row single-comment">
+        <div class="justify-content-start avatar-column">
+          <div class="comment-avatar"><%= gravatar_for c.user %></div>
+        </div>
+        <div class="justify-content-start ml-2 mess-buble">
+          <div class="font-weight-bold"><%= c.user.name %></div>
+          <div><%= c.cmt %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

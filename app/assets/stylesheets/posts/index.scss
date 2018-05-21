@@ -2,16 +2,23 @@
   $content-background: #212529;
   background-image: url("beautiful-red-tone-sunrise-snow-trees-ak-2048x1152.jpg");
   background-size: cover;
-  min-height: 1000px;
+  min-height: 100vh;
   .post-part{
     background-size: cover;
     padding-left: 0;
     padding-right: 0;
   }
+
+
+  .post-row{
+    padding:5px;
+  }
+
   .card{
     padding: 0;
     margin-top: 10px;
     margin-bottom: 10px;
+
   }
 
   .gravatar{
@@ -19,8 +26,9 @@
   }
 
   .user-avatar{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
+    margin:5px;
   }
 
   a.btn-toolbar{
@@ -32,15 +40,6 @@
     background-color: #fff;
   }
 
-  .card-header-user{
-    padding-left:0;
-    padding-right:0;
-  }
-
-  .card-header-image{
-    padding:5px 0 5px 0;
-  }
-
   .comment-btn{
     padding-right:0;
     color: #007bff;
@@ -49,6 +48,7 @@
   .edit-btn{
     padding:0;
   }
+
 .show-comment-block
   .delete-btn{
     padding-left:0;
@@ -62,11 +62,33 @@
     margin: 0;
   }
 
+  .form-row {
+    margin: 0;
+  }
   .hidden-comment-block{
     display: none;
-    z-index: 1000;
-    position: sticky;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    .comment-avatar{
+      width:50px;
+      height:50px;
+    }
+
   }
+
+  .mess-buble{
+    padding: 6px 12px 7px 12px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #ebedf0;
+  }
+  .single-comment{
+    margin:5px;
+  }
+
+  .post-comment{
+    min-width: 75px;
+  }
+
   @media(max-width: 498px){
     .hide-action{
       display: none;

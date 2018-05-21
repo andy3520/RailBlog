@@ -37,7 +37,9 @@
               <div class="card-footer">
                 <div class="row">
                   <div class="col-4 comment-btn">
-                    <a class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
+                    <%= link_to new_comment_path, remote: true do %>
+                      <a class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
+                    <% end %>
                   </div>
                   <div class="col-4 edit-btn">
                     <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
@@ -51,8 +53,8 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body hidden-comment-block ajax-comment">
-                <%= render partial: 'comments/form', locals: { comment: Comment.new , post_id: p.id } %>
+              <div class="card-body hidden-comment-block">
+
               </div>
             <% elsif @post_edit.id == p.id %>
               <%= form_for(@post_edit, url: post_path , method: :put) do |f| %>
@@ -105,7 +107,6 @@
                 </div>
               </div>
               <div class="card-body hidden-comment-block">
-                <%= render partial: 'comments/form', locals: { comment: Comment.new, post_id: p.id } %>
 
               </div>
             <% end %>

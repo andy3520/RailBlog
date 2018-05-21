@@ -5,9 +5,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
-    height: auto;
+    height: 100vh;
     min-height: 500px;
     margin:0;
+    padding-top:20vh;
   }
 
   .replace-form-title{
@@ -15,12 +16,20 @@
   }
 
   @media(max-width: 550px){
+
     .title-form{
       display: none;
     }
 
     .replace-form-title {
       display: inline;
+      margin: 10vh;
+    }
+  }
+
+  @media(max-width: 768px){
+    .jumbotron{
+      padding-top:10vh;
     }
   }
 }

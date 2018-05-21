@@ -1,5 +1,5 @@
 .custom-navbar{
-  height: 120px;
+  height: 70px;
 
   background: #fff;
   .navbrand-color{
@@ -8,18 +8,53 @@
   div.icon-nav>a:hover{
     text-decoration: none;
   }
+
+  .icon-nav{
+    .img-fluid{
+      width: 30px;
+      height:30px;
+    }
+  }
   .brand-postition{
-    margin-left: -10px;
+    margin-left: -5px;
   }
   .brand-postition:hover{
     color:$theme-color;
   }
 
   .navbar-brand{
-    font-size: 30px;
+    font-size: 25px;
   }
 
-  @media  (max-width: 341px){
+  .dropdown-menu{
+    min-width: auto;
+  }
+
+  h5#dropdownMenuButton {
+    margin: 0;
+    padding: 0;
+    color: $theme-color;
+    user-select: none;
+  }
+
+  h5#dropdownMenuButton:hover{
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  @media(min-width:600px){
+    h5#dropdownMenuButton:hover{
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      padding:20px;
+    }
+
+    h5#dropdownMenuButton {
+      padding:20px;
+    }
+  }
+
+  @media  (max-width: 309px){
     .navbar-brand{
       display: none;
     }
