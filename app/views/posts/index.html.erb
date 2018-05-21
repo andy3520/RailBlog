@@ -1,7 +1,7 @@
 <% provide(:title, 'New feed') %>
 <div class="list-post">
   <div class="container-fluid text-center post-part">
-    <%= render partial: 'form',locals: {post: Post.new} %>
+    <%= render 'form'%>
   </div>
   <hr class="bg-white" />
   <div class="container-fluid">
@@ -40,6 +40,7 @@
                     <%= link_to new_comment_path, remote: true do %>
                       <a class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
                     <% end %>
+
                   </div>
                   <div class="col-4 edit-btn">
                     <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
