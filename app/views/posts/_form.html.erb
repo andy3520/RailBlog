@@ -1,29 +1,29 @@
-<%= form_for(@post, url: posts_path) do |f| %>
+<%= form_for(@post, url: posts_path, remote: true) do |f| %>
 <div class="form-row">
-  <div class="form-group col-8 offset-2">
+  <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.hidden_field :user_id, value: current_user.id, class: "form-control" %>
   </div>
-  <div class="form-group col-8 offset-2">
+  <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.text_field :title, placeholder: "Title of your post", class: "form-control" %>
   </div>
-  <div class="col-8 offset-2 text-left error-message">
+  <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <% if @post.errors[:title] %>
       <% @post.errors[:title].each do |t| %>
         <i class="fa fa-exclamation-circle"></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/>
       <% end %>
     <% end %>
   </div>
-  <div class="form-group col-8 offset-2">
-    <%= f.text_area :content, placeholder: "Content of your post", class: "form-control" %>
+  <div class="form-group col-12 col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
+    <%= f.text_area :content,rows: "4",placeholder: "Content of your post", class: "form-control"%>
   </div>
-  <div class="col-8 offset-2 text-left error-message">
+  <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <% if @post.errors[:content] %>
       <% @post.errors[:content].each do |t| %>
         <i class="fa fa-exclamation-circle"></i>&nbsp;Content:&nbsp;<%= t.to_s.capitalize %><br/>
       <% end %>
     <% end %>
   </div>
-  <div class="form-group col-8 offset-2">
+  <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.submit "Post", class: "btn btn-danger text-uppercase form-control"%>
   </div>
 </div>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :posts
   resources :users
+  resources :comments
   root to: 'blog#index'
   get     '/signup',     to: 'users#new'
   post    '/signup',     to: 'users#create'
