@@ -1,0 +1,16 @@
+<%= form_for(post, url: post_path, remote: true, method: :put) do |f| %>
+  <div class="card-body">
+    <%= f.hidden_field :id_post, value: post.id, class: "form-control" %>
+    <%= f.hidden_field :user_id, value: post.user.id,  class: "form-control" %>
+    <h6 class="card-subtitle mb-2 text-muted">Last update:&nbsp;<%= time_ago_in_words(post.updated_at) %> ago</h6>
+    <%= f.text_field :title, value: post.title, class: "card-title font-weight-bold form-control post-title-js" %>
+    <div id="error-edit-title"></div>
+    <%= f.text_area :content,rows: "4", value: post.content, class: "form-control card-text post-content-js" %>
+    <div id="error-edit-content"></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary save-button-js" disabled="true">Save changes</button>
+  </div>
+<% end %>
+

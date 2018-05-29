@@ -1,1 +1,20 @@
-$("<%= escape_javascript(render @post) %>").appendTo(".post-row");
+<% if @error.nil? %>
+  $("<%= escape_javascript(render @post) %>").appendTo("#post-new");
+  $('#post-success').addClass("alert alert-success").html("<%= flash[:notice] %>").appendTo('#post-success');
+  $("#post_title").val("");
+  $("#post_content").val("");
+  $('#error-create-title').html("").appendTo('#error-create-title');
+  $('#error-create-content').html("").appendTo('#error-create-content');
+<% else %>
+  <% if @post.errors[:title] %>
+    $('#error-create-title').html("<% @post.errors[:title].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo('#error-create-title');
+  <% else %>
+    $('#error-create-title').html("").appendTo('#error-create-title');
+  <% end %>
+  <% if @post.errors[:content] %>
+    $('#error-create-content').html("<% @post.errors[:content].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo('#error-create-content');
+  <% else %>
+    $('#error-create-content').html("").appendTo('#error-create-content');
+  <% end %>
+<% end %>
+

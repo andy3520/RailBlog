@@ -89,6 +89,14 @@
     min-width: 75px;
   }
 
+  .btn-more{
+    padding:0;
+  }
+
+  .btn-more-change:focus{
+    background: $theme-color;
+  }
+
   @media(max-width: 498px){
     .hide-action{
       display: none;

@@ -5,17 +5,29 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
-    height: 100vh;
-    min-height: 500px;
+    height: 95vh;
     margin:0;
-    padding-top:20vh;
+    padding-top:10vh;
   }
 
   .replace-form-title{
     display: none;
   }
 
-  @media(max-width: 550px){
+ @media(max-width: 550px){
+    .title-form{
+      display: none;
+    }
+
+    .replace-form-title {
+      display: inline;
+    }
+  }
+
+  @media(max-height: 750px){
+    .jumbotron{
+      height: 105vh;
+    }
 
     .title-form{
       display: none;
@@ -23,13 +35,21 @@
 
     .replace-form-title {
       display: inline;
-      margin: 10vh;
     }
   }
 
-  @media(max-width: 768px){
+  @media(max-height: 450px){
     .jumbotron{
-      padding-top:10vh;
+      height: 150vh;
+    }
+
+    .title-form{
+      display: none;
+    }
+
+    .replace-form-title {
+      display: inline;
     }
   }
+
 }

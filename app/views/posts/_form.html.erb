@@ -6,28 +6,15 @@
   <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.text_field :title, placeholder: "Title of your post", class: "form-control" %>
   </div>
-  <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-    <% if @post.errors[:title] %>
-      <% @post.errors[:title].each do |t| %>
-        <i class="fa fa-exclamation-circle"></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/>
-      <% end %>
-    <% end %>
+  <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3" id="error-create-title">
   </div>
   <div class="form-group col-12 col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.text_area :content,rows: "4",placeholder: "Content of your post", class: "form-control"%>
   </div>
-  <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-    <% if @post.errors[:content] %>
-      <% @post.errors[:content].each do |t| %>
-        <i class="fa fa-exclamation-circle"></i>&nbsp;Content:&nbsp;<%= t.to_s.capitalize %><br/>
-      <% end %>
-    <% end %>
+  <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3" id="error-create-content">
   </div>
   <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.submit "Post", class: "btn btn-danger text-uppercase form-control"%>
   </div>
 </div>
 <% end %>
-<script type="text/javascript">
-  $('.error-message').css('color','red').delay(3000).fadeOut('slow');
-</script>

@@ -1,0 +1,18 @@
+<% if @error.nil? %>
+  $('#post_number_<%= @post.id %>').closest('.card').find('.card-title').html('<%= @post.title %>');
+  $('#post_number_<%= @post.id %>').closest('.card').find('.card-text').html('<%= @post.content %>');
+  $('#editPostModal').modal('hide');
+  $('#error-edit-title').html("").appendTo('#error-edit-title');
+  $('#error-edit-content').html("").appendTo('#error-edit-content');
+<% else %>
+  <% if @post.errors[:title] %>
+    $('#error-edit-title').html("<% @post.errors[:title].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo('#error-edit-title');
+  <% else %>
+    $('#error-edit-title').html("").appendTo('#error-edit-title');
+  <% end %>
+  <% if @post.errors[:content] %>
+    $('#error-edit-content').html("<% @post.errors[:content].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo('#error-edit-content');
+  <% else %>
+    $('#error-edit-content').html("").appendTo('#error-edit-content');
+  <% end %>
+<% end %>
