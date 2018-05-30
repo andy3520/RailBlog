@@ -74,6 +74,10 @@
     background: $theme-color;
   }
 
+  .pic-preview:hover{
+    opacity: 0.5;
+  }
+
   @media(max-width: 498px){
     .hide-action{
       display: none;

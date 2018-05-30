@@ -17,6 +17,7 @@
     <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control", id: "image_uploader" %>
   </div>
   <div id="previewer" class="form-group col-12 col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 d-none">
+    <br><input id="remove_all_pic_btn" type="button" class="btn btn-danger" value="Remove all" onclick="removeAllPic();" />
   </div>
   <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.submit "Post", class: "btn btn-danger text-uppercase form-control"%>
@@ -50,10 +51,10 @@
                 reader.onload = function(event) {
                     $($.parseHTML('<img>'))
                     .attr('src', event.target.result)
-                    .attr('width','100px')
-                    .attr('id','pic-preview')
+                    .attr('width','150px')
+                    .attr('class','pic-preview')
                     .attr('onclick', "$('#imagepreview').attr('src', $(this).attr('src'));$('#imagemodal').modal('show','true');")
-                    .appendTo(placeToInsertImagePreview);
+                    .prependTo(placeToInsertImagePreview);
                 }
                 reader.readAsDataURL(input.files[i]);
             }
@@ -67,5 +68,9 @@
     });
   });
 
-
+  function removeAllPic(){
+    $('#image_uploader').val("");
+    $('#previewer').find('.pic-preview').remove();
+    $('#previewer').addClass('d-none');
+  }
 </script>
