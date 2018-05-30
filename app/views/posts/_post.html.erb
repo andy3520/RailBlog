@@ -26,21 +26,29 @@
   </div>
   <div class="card-footer">
     <div class="row">
-      <div class="col-4 comment-btn" >
-        <%= link_to(comments_path(post_id: "#{post.id}"), remote: true,class: 'card-link btn btn-toolbar justify-content-start') do %>
-          <i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span>
-        <% end %>
-      </div>
-      <div class="col-4 edit-btn">
-        <%= link_to(edit_post_path(post) , method: :get, remote: true, class: 'card-link btn btn-toolbar justify-content-center') do %>
-          <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
-        <% end %>
-      </div>
-      <div class="col-4 delete-btn">
-        <%= link_to(post_path(post) , method: :delete, remote: true, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
-        <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
-        <% end %>
-      </div>
+      <% if current_user.id == post.user_id %>
+        <div class="col-4 comment-btn" >
+          <%= link_to(comments_path(post_id: "#{post.id}"), remote: true,class: 'card-link btn btn-toolbar justify-content-start') do %>
+            <i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span>
+          <% end %>
+        </div>
+        <div class="col-4 edit-btn">
+          <%= link_to(edit_post_path(post) , method: :get, remote: true, class: 'card-link btn btn-toolbar justify-content-center') do %>
+            <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
+          <% end %>
+        </div>
+        <div class="col-4 delete-btn">
+          <%= link_to(post_path(post) , method: :delete, remote: true, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
+          <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="col-4 comment-btn" >
+          <%= link_to(comments_path(post_id: "#{post.id}"), remote: true,class: 'card-link btn btn-toolbar') do %>
+            <i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="card-body hidden-comment-block">

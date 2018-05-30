@@ -4,12 +4,21 @@
   block.toggle(100);
   block.empty();
   $("<%= escape_javascript(render partial: 'form', locals: { comment: Comment.new, post_id: @post_id }) %>").appendTo(block);
-  $('<h6>Not have any comment.</h6>').appendTo(block);
+  $('<h6 id="notice-nocomment">Not have any comment.</h6>').appendTo(block);
+  $('<div class="container new-comment-js"></div>').appendTo(block);
+<% when 1..2 %>
+  block = $('#post_number_<%= @post_id %>').closest('.card').find('.hidden-comment-block');
+  block.toggle(100);
+  block.empty();
+  $("<%= escape_javascript(render partial: 'form', locals: { comment: Comment.new, post_id: @post_id }) %>").appendTo(block);
+  $('<div class="container new-comment-js"></div>').appendTo(block);
+  $("<%= escape_javascript(render partial: 'all_comments', locals: { comments: @comments}) %>").appendTo(block);
 <% else %>
   block = $('#post_number_<%= @post_id %>').closest('.card').find('.hidden-comment-block');
   block.toggle(100);
   block.empty();
   $("<%= escape_javascript(render partial: 'form', locals: { comment: Comment.new, post_id: @post_id }) %>").appendTo(block);
+  $('<div class="container new-comment-js"></div>').appendTo(block);
   $("<%= escape_javascript(render partial: 'all_comments', locals: { comments: @comments}) %>").appendTo(block);
   $('<div class="comments-more"></div>').appendTo(block);
   $('<%= link_to "Read more comment", "/more_comment?post_id=#{@post_id}", method: :get, remote: true, class: "link-more-comment" %>').appendTo(block);

@@ -1,6 +1,17 @@
+error = $('#post_number_<%= @comment.post_id %>').closest('.card').find('.cmt-error');
+block = $('#post_number_<%= @comment.post_id %>').closest('.card').find('.new-comment-js');
+notice_nocmt = $('#post_number_<%= @comment.post_id %>').closest('.card').find("#notice-nocomment");
+empty_input = $('#post_number_<%= @comment.post_id %>').closest('.card').find("#comment_cmt");
 <% if @error.nil? %>
-  block = $('#post_number_<%= @comment.post_id %>').closest('.card').find('.new-comment-js');
-  $("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment }) %>").appendTo(block);
+  $("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment }) %>").prependTo(block);
+  $(notice_nocmt).remove();
+  $(empty_input).val("");
+  error.html("").appendTo(error);
 <% else %>
-
+  <% if @comment.errors[:cmt] %>
+    error.removeClass('d-none');
+    error.html("<% @comment.errors[:cmt].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo(error);
+  <% else %>
+    error.html("").appendTo(error);
+  <% end %>
 <% end %>

@@ -19,6 +19,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      if params[:images]
+        params[:images].each { |image|
+          @post.pictures.create(image: image)
+        }
+      end
       respond_to do |f|
         f.js { flash.now[:notice] = "Your post is successfully created." }
       end

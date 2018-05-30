@@ -1,7 +1,35 @@
-<div class="justify-content-start avatar-column">
-  <div class="comment-avatar"><%= gravatar_for comment.user %></div>
+<div class="row single-comment" id="comment_num_<%= comment.id %>">
+  <div class="justify-content-start avatar-column">
+    <div class="comment-avatar"><%= gravatar_for comment.user %></div>
+  </div>
+  <div class="justify-content-start ml-2 mess-buble">
+    <div class="font-weight-bold"><%= comment.user.name %></div>
+    <div class="comment-content"><%= comment.cmt %></div>
+  </div>
 </div>
-<div class="justify-content-start ml-2 mess-buble">
-  <div class="font-weight-bold"><%= comment.user.name %></div>
-  <div><%= comment.cmt %></div>
+<div class="row d-none comment-feature" id="comment_feature_<%= comment.id %>">
+  <div class="justify-content-start ml-2">
+    <i class="fa fa-reply" ></i>
+  </div>
+  <% if current_user.id == comment.user_id %>
+    <%= link_to(edit_comment_path(comment), method: :get, remote: true, class: "justify-content-start ml-5") do %>
+      <div><i class="fa fa-pencil"></i></div>
+    <% end %>
+    <%= link_to(comment_path(comment), method: :delete, remote: true, class: "justify-content-start ml-5", data: { confirm: 'Are you sure?' }) do %>
+      <div><i class="fa fa-trash"></i></div>
+    <% end %>
+  <% end %>
+  <div class="justify-content-start ml-5">
+    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+  </div>
 </div>
+<script type="text/javascript">
+  $("#comment_num_<%= comment.id %>,#comment_feature_<%= comment.id %>").closest('.single-comment').mouseout(function() {
+    setTimeout(function(){
+      $('#comment_feature_<%= comment.id %>').addClass('d-none');
+    },2000);
+  });
+  $("#comment_num_<%= comment.id %>,#comment_feature_<%= comment.id %>").mouseenter(function(event) {
+    $('#comment_feature_<%= comment.id %>').removeClass('d-none');
+  });
+  </script>

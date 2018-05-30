@@ -1,9 +1,7 @@
 <% comments.each do |c| %>
   <% if c.user.present? %>
-    <div class="container new-comment-js">
-      <div class="row single-comment">
-        <%= render partial: 'comment', locals: { comment: c } %>
-      </div>
+    <div class="container">
+      <%= render partial: 'comment', locals: { comment: c } %>
     </div>
   <% end %>
 <% end %>

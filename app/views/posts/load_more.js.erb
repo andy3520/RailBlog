@@ -1,9 +1,7 @@
 <% n = @posts_more.to_a %>
 <% case n.count %>
 <% when 0 %>
-  $('#editPostModal').modal('show','true');
-  $('#editPostModalLabel').text('notification');
-  $("#editPostForm").html("<div class='card-body'><h4>Sorry, but no more post to show</h4></div><div class='modal-footer '><button type='button' class='btn btn-secondary m-auto' data-dismiss='modal'>Ok</button></div>");
+  $('.btn-more-change').remove();
 <% else %>
   $("<%= escape_javascript(render @posts_more) %>").appendTo("#post-more");
 <% end %>

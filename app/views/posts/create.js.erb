@@ -1,5 +1,5 @@
 <% if @error.nil? %>
-  $("<%= escape_javascript(render @post) %>").appendTo("#post-new");
+  $("<%= escape_javascript(render @post) %>").prependTo("#post-new");
   $('#post-success').addClass("alert alert-success").html("<%= flash[:notice] %>").appendTo('#post-success');
   $("#post_title").val("");
   $("#post_content").val("");
