@@ -1,10 +1,10 @@
 <% if @error.nil? %>
   $("<%= escape_javascript(render @post) %>").prependTo("#post-new");
-  $('#post-success').addClass("alert alert-success").html("<%= flash[:notice] %>").appendTo('#post-success');
   $("#post_title").val("");
   $("#post_content").val("");
   $('#error-create-title').html("").appendTo('#error-create-title');
   $('#error-create-content').html("").appendTo('#error-create-content');
+  $('.remove-btn').click();
 <% else %>
   <% if @post.errors[:title] %>
     $('#error-create-title').html("<% @post.errors[:title].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;Title:&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo('#error-create-title');
@@ -17,4 +17,5 @@
     $('#error-create-content').html("").appendTo('#error-create-content');
   <% end %>
 <% end %>
+
 

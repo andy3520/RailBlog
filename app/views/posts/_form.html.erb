@@ -14,10 +14,14 @@
   <div class="text-left error-message col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3" id="error-create-content">
   </div>
   <div class="form-group col-12 col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-    <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control", id: "image_uploader" %>
-  </div>
-  <div id="previewer" class="form-group col-12 col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 d-none">
-    <br><input id="remove_all_pic_btn" type="button" class="btn btn-danger" value="Remove all" onclick="removeAllPic();" />
+    <div class="row" id="add-cocoon">
+      <%= f.fields_for :pictures do |pic| %>
+        <%= render 'pictures/picture_field', :f => pic %>
+      <% end %>
+    </div>
+    <div class='links'>
+      <%= link_to_add_association "Add a picture", f, :pictures, class: "btn btn-danger", id: 'link-add-pic'%>
+    </div>
   </div>
   <div class="form-group col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
     <%= f.submit "Post", class: "btn btn-danger text-uppercase form-control"%>
@@ -33,44 +37,13 @@
         </button>
         <img src="" id="imagepreview" width="100%" />
       </div>
-<!--       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div> -->
     </div>
   </div>
 </div>
 <script type="text/javascript">
-  $(function() {
-    var imagesPreview = function(input, placeToInsertImagePreview) {
-
-        if (input.files) {
-            var filesAmount = input.files.length;
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
-
-                reader.onload = function(event) {
-                    $($.parseHTML('<img>'))
-                    .attr('src', event.target.result)
-                    .attr('width','150px')
-                    .attr('class','pic-preview')
-                    .attr('onclick', "$('#imagepreview').attr('src', $(this).attr('src'));$('#imagemodal').modal('show','true');")
-                    .prependTo(placeToInsertImagePreview);
-                }
-                reader.readAsDataURL(input.files[i]);
-            }
-        }
-
-    };
-
-    $('#image_uploader').on('change', function() {
-        $('#previewer').removeClass('d-none');
-        imagesPreview(this, '#previewer');
-    });
+  $(document).ready(function() {
+    $("#link-add-pic").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon');
   });
-
-  function removeAllPic(){
-    $('#image_uploader').val("");
-    $('#previewer').find('.pic-preview').remove();
-    $('#previewer').addClass('d-none');
-  }
 </script>

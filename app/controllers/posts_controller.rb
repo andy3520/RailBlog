@@ -25,7 +25,7 @@ class PostsController < ApplicationController
         }
       end
       respond_to do |f|
-        f.js { flash.now[:notice] = "Your post is successfully created." }
+        f.js {}
       end
     else
       @error = @post.errors
@@ -78,6 +78,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.required(:post).permit(:user_id, :title, :content)
+    params.required(:post).permit(:user_id, :title, :content, pictures_attributes: [:id, :image, :_destroy])
   end
 end

@@ -35,6 +35,8 @@ gem "font-awesome-rails"
 
 gem 'will_paginate', '>= 3.1'
 gem "paperclip", "~> 6.0.0"
+gem "cocoon"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # Reduces boot times through caching; required in config/boot.rb
