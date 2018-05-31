@@ -1,0 +1,40 @@
+<div class="nested-fields col-6 col-md-4 col-lg-3">
+  <div class="logo_uploader">
+    <% if f.object.id.present? %>
+      <img src="<%= f.object.image.url %>" />
+    <% else %>
+      <%= image_tag "upload_icon.png"%>
+    <% end %>
+  </div>
+  <div class="text-center">
+    <%= link_to_remove_association "Remove", f, class: "btn btn-danger btn-sm remove-btn" %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    var imagesPreview = function(input) {
+      var placeToInsertImagePreview = $(input).closest('.nested-fields').find('.logo_uploader');
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          $($.parseHTML('<img>'))
+          .attr('src', event.target.result)
+          .prependTo(placeToInsertImagePreview);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+    $('.image_uploader').off();
+    $('.image_uploader').on('change', function() {
+      $('.previewer').removeClass('d-none');
+      $(this).closest('.nested-fields').find('.logo_uploader').empty();
+      imagesPreview(this);
+    });
+  });
+  $('.logo_uploader').off();
+  $('.logo_uploader').click(function(event) {
+    $(this).closest('.nested-fields').find('.image_uploader').click();
+  });
+
+</script>
