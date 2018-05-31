@@ -9,7 +9,7 @@
     <div id="error-edit-content"></div>
     <div class="row" id="edit-cocoon">
       <%= f.fields_for :pictures do |pic| %>
-        <%= render 'edit_picture_fields', :f => pic %>
+        <%= render 'picture_fields', :f => pic %>
       <% end %>
     </div>
     <div class='links text-center'>
@@ -22,10 +22,4 @@
     <button type="submit" class="btn btn-primary save-button-js" >Save changes</button>
   </div>
 <% end %>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#link-add-pic").
-      data("association-insertion-method", 'append').
-      data("association-insertion-node", '#edit-cocoon');
-  });
-</script>
+

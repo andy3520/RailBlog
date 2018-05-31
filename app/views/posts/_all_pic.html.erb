@@ -4,15 +4,15 @@
     <%= image_tag post.pictures.first.image.url(:original), class: 'post-pic' %>
   <% when 2..4 %>
       <% post.pictures.each do |pic| %>
-        <div class="pic-col col-6">
-          <%= image_tag pic.image.url(:original), class: 'post-pic' %>
-        </div>
+          <div class="pic-col col-6">
+            <%= image_tag pic.image.url(:original), class: 'post-pic' %>
+          </div>
       <% end %>
   <% else %>
       <% post.pictures.each do |pic| %>
-        <div class="pic-col col-4 pictures-render">
-          <%= image_tag pic.image.url(:original), class: 'post-pic' %>
-        </div>
+          <div class="pic-col col-4 pictures-render">
+            <%= image_tag pic.image.url(:original), class: 'post-pic' %>
+          </div>
       <% end %>
   <% end %>
   <% end %>
