@@ -5,12 +5,12 @@ class PostsController < ApplicationController
   @@load = 1
   def index
     @@load = 1
-    order_post(1,10)
+    order_post(1,5)
   end
 
   def load_more
     @@load += 1
-    @posts_more = order_post(@@load,10)
+    @posts_more = order_post(@@load,5)
     respond_to do |f|
       f.js {}
     end
@@ -52,6 +52,11 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      if params[:images]
+        params[:images].each { |image|
+          @post.pictures.update(image: image)
+        }
+      end
       respond_to do |f|
         f.js {}
       end

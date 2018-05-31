@@ -22,28 +22,9 @@
  <div class="card-body">
     <h5 class="card-title font-weight-bold"><%= post.title %></h5>
     <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(post.created_at) %> ago</h6>
-    <% if post.pictures %>
-      <% case post.pictures.count %>
-      <% when 1 %>
-        <%= image_tag post.pictures.first.image.url(:original), class: 'post-pic' %>
-      <% when 2..4 %>
-        <div class="row">
-          <% post.pictures.each do |pic| %>
-              <div class="pic-col col-6">
-                <%= image_tag pic.image.url(:original), class: 'post-pic' %>
-              </div>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="row">
-          <% post.pictures.each do |pic| %>
-              <div class="pic-col col-4">
-                <%= image_tag pic.image.url(:original), class: 'post-pic' %>
-              </div>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
+    <div class="row pictures-render">
+      <%= render partial: 'all_pic',locals: { post: post } %>
+    </div>
     <p class="card-text"><%= post.content %></p>
   </div>
   <div class="card-footer">

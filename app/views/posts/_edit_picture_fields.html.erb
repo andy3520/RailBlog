@@ -1,7 +1,7 @@
 <div class="nested-fields col-6 col-md-4 col-lg-3">
   <div class="logo_uploader">
-    <% if f.object.image.present? %>
-      <img src="<%= f.object.image.url %>" alt="img">
+    <% if f.object.id.present? %>
+      <img src="<%= f.object.image.url %>" />
     <% else %>
       <%= image_tag "upload_icon.png"%>
     <% end %>
@@ -9,19 +9,18 @@
   <div class="text-center">
     <%= link_to_remove_association "Remove", f, class: "btn btn-danger btn-sm remove-btn" %>
   </div>
-    <%= f.file_field :image, class: 'image_uploader d-none'%>
 </div>
 
 <script type="text/javascript">
   $(function() {
     var imagesPreview = function(input) {
-      if (input.files&&input.files[0]) {
+      var placeToInsertImagePreview = $(input).closest('.nested-fields').find('.logo_uploader');
+      if (input.files) {
         var reader = new FileReader();
         reader.onload = function(event) {
-          $(input)
-          .closest('.nested-fields')
-          .find('img')
-          .attr('src', event.target.result);
+          $($.parseHTML('<img>'))
+          .attr('src', event.target.result)
+          .prependTo(placeToInsertImagePreview);
         }
         reader.readAsDataURL(input.files[0]);
       }
@@ -29,11 +28,12 @@
     $('.image_uploader').off();
     $('.image_uploader').on('change', function() {
       $('.previewer').removeClass('d-none');
+      $(this).closest('.nested-fields').find('.logo_uploader').empty();
       imagesPreview(this);
     });
   });
   $('.logo_uploader').off();
-  $('.logo_uploader').click(function() {
+  $('.logo_uploader').click(function(event) {
     $(this).closest('.nested-fields').find('.image_uploader').click();
   });
 

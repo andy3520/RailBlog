@@ -1,6 +1,8 @@
 <% if @error.nil? %>
   $('#post_number_<%= @post.id %>').closest('.card').find('.card-title').html('<%= @post.title %>');
   $('#post_number_<%= @post.id %>').closest('.card').find('.card-text').html('<%= @post.content %>');
+  $('#post_number_<%= @post.id %>').closest('.card').find('.pictures-render').empty();
+  $('#post_number_<%= @post.id %>').closest('.card').find('.pictures-render').append("<%= j(render partial: 'all_pic',locals: { post: @post }) %>");
   $('#editPostModal').modal('hide');
   $('#error-edit-title').html("").appendTo('#error-edit-title');
   $('#error-edit-content').html("").appendTo('#error-edit-content');

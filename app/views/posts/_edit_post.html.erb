@@ -7,10 +7,25 @@
     <div id="error-edit-title"></div>
     <%= f.text_area :content,rows: "4", value: post.content, class: "form-control card-text post-content-js" %>
     <div id="error-edit-content"></div>
+    <div class="row" id="edit-cocoon">
+      <%= f.fields_for :pictures do |pic| %>
+        <%= render 'edit_picture_fields', :f => pic %>
+      <% end %>
+    </div>
+    <div class='links text-center'>
+      <%= link_to_add_association "Add a picture", f, :pictures, class: "btn btn-danger", id: 'link-edit'%>
+    </div>
   </div>
+
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary save-button-js" disabled="true">Save changes</button>
+    <button type="button" class="btn btn-secondary" onclick="$('#link-edit').off();" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary save-button-js" >Save changes</button>
   </div>
 <% end %>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#link-add-pic").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#edit-cocoon');
+  });
+</script>
