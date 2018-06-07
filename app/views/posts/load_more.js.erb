@@ -1,0 +1,7 @@
+<% n = @posts_more.to_a %>
+<% case n.count %>
+<% when 0 %>
+  $('.btn-more-change').remove();
+<% else %>
+  $("<%= escape_javascript(render @posts_more) %>").appendTo("#post-more");
+<% end %>

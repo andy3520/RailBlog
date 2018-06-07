@@ -7,6 +7,7 @@ module UsersHelper
 
   def first_name(full_name)
     words = full_name.split(' ')
-    words.last
+    last_word = words.last
+    user = last_word.length > 6 ? last_word[0...6]+'..' : last_word
   end
 end

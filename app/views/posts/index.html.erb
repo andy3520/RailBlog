@@ -1,131 +1,36 @@
 <% provide(:title, 'New feed') %>
 <div class="list-post">
   <div class="container-fluid text-center post-part">
-    <%= render partial: 'form',locals: {post: Post.new} %>
+    <%= render 'form'%>
   </div>
   <hr class="bg-white" />
   <div class="container-fluid">
+    <div class="row post-row" id='post-new'>
+    </div>
     <div class="row post-row">
-      <% @posts.each do |p| %>
-        <div class="card col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-          <div class="card-header">
-            <div class="container">
-              <div class="row">
-                <div class="justify-content-start ml-3">
-                  <span id="post_number_<%=p.id%>" />
-                  <div class="user-avatar"><%= gravatar_for p.user %></div>
-                </div>
-                <div class="justify-content-start ml-2">
-                  <div class="container">
-                    <div class="row mt-3">
-                      <span class="user-name font-weight-bold"><%= p.user.name %></span>
-                    </div>
-                    <div class="row">
-                      <span class="user-name text-muted"><%= p.user.email %></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% if @post_edit.nil? %>
-              <div class="card-body">
-                <h5 class="card-title font-weight-bold"><%= p.title %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(p.created_at) %> ago</h6>
-                <p class="card-text"><%= p.content %></p>
-              </div>
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col-4 comment-btn">
-                    <%= link_to new_comment_path, remote: true do %>
-                      <a class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
-                    <% end %>
-                  </div>
-                  <div class="col-4 edit-btn">
-                    <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
-                    <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
-                    <% end %>
-                  </div>
-                  <div class="col-4 delete-btn">
-                    <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
-                    <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body hidden-comment-block">
-
-              </div>
-            <% elsif @post_edit.id == p.id %>
-              <%= form_for(@post_edit, url: post_path , method: :put) do |f| %>
-                <div class="card-body">
-                  <%= f.hidden_field :id_post, value: @post_edit.id, class: "form-control" %>
-                  <%= f.hidden_field :user_id, value: @post_edit.user.id,  class: "form-control" %>
-                  <h6 class="card-subtitle mb-2 text-muted">Last update:&nbsp;<%= time_ago_in_words(p.updated_at) %> ago</h6>
-                  <%= f.text_field :title, value: @post_edit.title, class: "card-title font-weight-bold form-control" %>
-                  <%= f.text_area :content,rows: "4", value: @post_edit.content, class: "form-control card-text" %>
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-4 save-btn">
-                      <button type="submit" class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-floppy-o"></i>&nbsp;<span class="hide-action">Save</span></button>
-                    </div>
-              <% end %>
-                  <div class="col-4 edit-btn">
-                    <%= link_to( posts_path(:anchor => 'post_number_' + @post_edit.id.to_s) , class: 'card-link btn btn-toolbar justify-content-center') do %>
-                    <i class="fa fa-times"></i>&nbsp;<span class="hide-action">Cancel</span>
-                    <% end %>
-                  </div>
-                  <div class="col-4 delete-btn">
-                    <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
-                    <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            <% else %>
-              <div class="card-body">
-                <h5 class="card-title font-weight-bold"><%= p.title %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(p.created_at) %> ago</h6>
-                <p class="card-text"><%= p.content %></p>
-              </div>
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col-4 comment-btn" >
-                    <a href="#" class="card-link btn btn-toolbar justify-content-start"><i class="fa fa-commenting"></i>&nbsp;<span class="hide-action">Comment</span></a>
-                  </div>
-                  <div class="col-4 edit-btn">
-                    <%= link_to(edit_post_path(p) , method: :get, class: 'card-link btn btn-toolbar justify-content-center') do %>
-                    <i class="fa fa-pencil"></i>&nbsp;<span class="hide-action">Edit</span>
-                    <% end %>
-                  </div>
-                  <div class="col-4 delete-btn">
-                    <%= link_to(post_path(p) , method: :delete, class: 'card-link btn btn-toolbar justify-content-end' , data: { confirm: 'Are you sure?' }) do %>
-                    <i class="fa fa-trash"></i>&nbsp;<span class="hide-action">Delete</span>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body hidden-comment-block">
-
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+      <%= render @posts %>
+    </div>
+    <div class="row post-row" id='post-more'>
+    </div>
+    <div class="row post-row">
+      <div class="col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 btn-more">
+        <%= button_to 'More', '/load_more', method: :get, remote: true, class: 'btn btn-danger text-uppercase form-control btn-more-change' %>
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-  <% if !@post_edit.nil? %>
-    url_test = window.location.href;
-    window.location = url_test.includes("#post_number_<%= @post_edit.id %>")? url_test : url_test + "#post_number_<%= @post_edit.id %>";
-  <% end %>
-  // $(document).ready(function(e){
-  //   comment_show();
-  // });
-  // function comment_show(){
-  //   $('.comment-btn').on('click',function(){
-  //     $(this).closest('.card').find('.hidden-comment-block').toggle(100);
-  //   });
-  // }
-  </script>
+  <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold text-uppercase" id="editPostModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="editPostForm">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

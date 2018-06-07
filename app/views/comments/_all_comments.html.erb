@@ -1,0 +1,7 @@
+<% comments.each do |c| %>
+  <% if c.user.present? %>
+    <div class="container">
+      <%= render partial: 'comment', locals: { comment: c } %>
+    </div>
+  <% end %>
+<% end %>

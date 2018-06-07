@@ -1,0 +1,9 @@
+<% n = @comments_more.to_a %>
+<% case n.count %>
+<% when 0 %>
+  block = $('#post_number_<%= @post_id %>').closest('.card').find('.link-more-comment');
+  block.remove();
+<% else %>
+  block = $('#post_number_<%= @post_id %>').closest('.card').find('.comments-more');
+  $("<%= escape_javascript(render partial: 'all_comments', locals: { comments: @comments_more }) %>").appendTo(block);
+<% end %>

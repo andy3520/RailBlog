@@ -1,0 +1,12 @@
+<% if @error.nil? %>
+  up = $('#comment_num_<%= @comment.id %>').find('.comment-content');
+  up.html('<%= @comment.cmt %>');
+  $('#editPostModal').modal('hide');
+  $('.cmt-error').html("").appendTo(".cmt-error");
+<% else %>
+  <% if @comment.errors[:cmt] %>
+    $('.cmt-error').html("<% @comment.errors[:cmt].each do |t| %> <i class='fa fa-exclamation-circle'></i>&nbsp;<%= t.to_s.capitalize %><br/><% end %>").css('color','red').appendTo('.cmt-error');
+  <% else %>
+    $('.cmt-error').html("").appendTo('.cmt-error');
+  <% end %>
+<% end %>

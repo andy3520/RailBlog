@@ -1,0 +1,12 @@
+<%= form_for( comment, url: comment_path, remote: true, method: :put)do |f| %>
+<div class="card-body">
+    <%= f.hidden_field :user_id, value: comment.user_id, class: "form-control" %>
+    <%= f.hidden_field :post_id, value: comment.post_id, class: "form-control" %>
+    <%= f.text_area :cmt, value: comment.cmt, rows: "2",placeholder: "Enter your comment", class: "form-control edit-comment-js"%>
+  <div class="cmt-error"></div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-primary save-button-js" disabled="true">Save changes</button>
+</div>
+<% end %>

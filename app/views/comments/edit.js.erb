@@ -1,0 +1,14 @@
+$('#editPostModal').modal('show','true');
+$('#editPostModalLabel').text('Edit comment');
+$("#editPostForm").html("<%= escape_javascript(render partial: 'edit_comment', locals: { comment: @comment_edit } ) %>");
+old_cmt=$(".edit-comment-js").val();
+
+$(".edit-comment-js").keyup(function() {
+  new_cmt=$('.edit-comment-js').val();
+  if (new_cmt != old_cmt) {
+    $('.save-button-js').prop('disabled',false);
+  }
+  else{
+    $('.save-button-js').prop('disabled',true);
+  }
+});
