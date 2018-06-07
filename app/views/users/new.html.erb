@@ -11,7 +11,7 @@
         <h1 class="title-form text-uppercase font-weight-bold">Understand each other</h1>
         <h5 class="replace-form-title text-uppercase ">Share your idea, your feeling</h5><br class="replace-form-title" />
         <h4 class="replace-form-title text-uppercase font-weight-bold">Understand each other</h4>
-        <%= render "form" %>
+        <%= render partial: "form", locals: { user: @user } %>
       </div>
     </div>
   </div>

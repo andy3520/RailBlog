@@ -1,11 +1,11 @@
-<%= form_for(@user, url: signup_path) do |f| %>
+<%= form_for(user, url: signup_path) do |f| %>
 <div class="form-row">
   <div class="form-group col-8 offset-2 col-lg-4 offset-lg-4">
     <%= f.text_field :name, placeholder: "Your name", class: "form-control" %>
   </div>
   <div class="col-10 offset-2 col-lg-4 offset-lg-4 text-left error-message">
-    <% if @user.errors[:name] %>
-      <% @user.errors[:name].each do |t| %>
+    <% if user.errors[:name] %>
+      <% user.errors[:name].each do |t| %>
         <i class="fa fa-exclamation-circle"></i>&nbsp;Name:&nbsp;<%= t.to_s.capitalize %><br/>
       <% end %>
     <% end %>
@@ -14,8 +14,8 @@
     <%= f.email_field :email, placeholder: "Your email address", class: "form-control" %>
   </div>
   <div class="col-10 offset-2 col-lg-4 offset-lg-4 text-left error-message">
-    <% if @user.errors[:email] %>
-      <% @user.errors[:email].each do |t| %>
+    <% if user.errors[:email] %>
+      <% user.errors[:email].each do |t| %>
         <i class="fa fa-exclamation-circle"></i>&nbsp;Email:&nbsp;<%= t.to_s.capitalize %><br/>
       <% end %>
     <% end %>
@@ -24,8 +24,8 @@
     <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
   </div>
   <div class="col-10 offset-2 col-lg-4 offset-lg-4 text-left error-message">
-    <% if @user.errors[:password] %>
-      <% @user.errors[:password].each do |t| %>
+    <% if user.errors[:password] %>
+      <% user.errors[:password].each do |t| %>
         <i class="fa fa-exclamation-circle"></i>&nbsp;Password:&nbsp;<%= t.to_s.capitalize %><br/>
       <% end %>
     <% end %>
@@ -34,8 +34,8 @@
     <%= f.password_field :password_confirmation, placeholder: "Confirm password", class: "form-control" %>
   </div>
   <div class="col-10 offset-2 col-lg-4 offset-lg-4 text-left error-message">
-    <% if @user.errors[:password_confirmation] %>
-      <% @user.errors[:password_confirmation].each do |t| %>
+    <% if user.errors[:password_confirmation] %>
+      <% user.errors[:password_confirmation].each do |t| %>
         <i class="fa fa-exclamation-circle"></i>&nbsp;Password confirmation:&nbsp;<%= t.to_s.capitalize %><br/>
       <% end %>
     <% end %>
