@@ -4,13 +4,13 @@ $("#editPostForm").html("<%= escape_javascript(render partial: 'edit_post', loca
 old_title=$(".post-title-js").val();
 old_content=$(".post-content-js").val();
 
-$(".post-content-js , .post-title-js").keyup(function() {
-  new_content=$('.post-content-js').val();
-  new_title=$('.post-title-js').val();
-  if (new_content != old_content || new_title != old_title) {
-    $('.save-button-js').prop('disabled',false);
-  }
-  else{
-    $('.save-button-js').prop('disabled',true);
-  }
-});
+// $(".post-content-js , .post-title-js").keyup(function() {
+//   new_content=$('.post-content-js').val();
+//   new_title=$('.post-title-js').val();
+//   if (new_content != old_content || new_title != old_title) {
+//     $('.save-button-js').prop('disabled',false);
+//   }
+//   else{
+//     $('.save-button-js').prop('disabled',true);
+//   }
+// });

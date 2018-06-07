@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show,:edit]
   def new
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
+
+  end
+
+  def edit
+
   end
 
   def create
@@ -18,9 +23,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def avatar
+
+      respond_to do |f|
+        f.js {}
+      end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

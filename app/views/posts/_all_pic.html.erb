@@ -1,18 +1,30 @@
 <% if post.pictures %>
   <% case post.pictures.count %>
-  <% when 1 %>
-    <%= image_tag post.pictures.first.image.url(:original), class: 'post-pic' %>
-  <% when 2..4 %>
-    <% post.pictures.each do |pic| %>
-      <div class="pic-col col-6">
-        <%= image_tag pic.image.url(:original), class: 'post-pic' %>
-      </div>
-    <% end %>
-  <% else %>
-    <% post.pictures.each do |pic| %>
-      <div class="pic-col col-4 pictures-render">
-        <%= image_tag pic.image.url(:original), class: 'post-pic' %>
-      </div>
+    <% when 1 %>
+      <%= image_tag post.pictures.first.image.url(:original), class: 'post-pic post-1-pic' %>
+    <% else %>
+        <% post.pictures.each do |pic| %>
+            <div class="pic-col col-6 pictures-render">
+              <%= image_tag pic.image.url(:original), class: 'post-pic post-2-pic' %>
+            </div>
     <% end %>
   <% end %>
-  <% end %>
+<% end %>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  id="imagemodal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <img src="" id="imagepreview" width="100%" />
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.post-pic').click(function(event) {
+    $('#imagepreview').attr('src',$(this).attr('src'));
+    $('#imagemodal').modal('show','true');
+  });
+</script>

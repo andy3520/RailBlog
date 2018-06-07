@@ -1,0 +1,64 @@
+<%= form_for(user, url: signup_path) do |f| %>
+<div class="form-row">
+  <div class="form-group col-8 offset-2 col-lg-4 offset-lg-4">
+    <%= f.text_field :name, placeholder: "Your name", class: "form-control" %>
+  </div>
+  <div class="col-10 offset-2 col-lg-4 offset-lg-4 text-left error-message">
+    <% if user.errors[:name] %>
+      <% user.errors[:name].each do |t| %>
+        <i class="fa fa-exclamation-circle"></i>&nbsp;Name:&nbsp;<%= t.to_s.capitalize %><br/>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group col-8 offset-2 col-lg-4 offset-lg-4">
+    <%= f.email_field :email, placeholder: "Your email address", class: "form-control" %>
+  </div>
+  <div class="col-10 offset-2 col-lg-4 offset-lg-4 text-left error-message">
+    <% if user.errors[:email] %>
+      <% user.errors[:email].each do |t| %>
+        <i class="fa fa-exclamation-circle"></i>&nbsp;Email:&nbsp;<%= t.to_s.capitalize %><br/>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="nested-fields col-6 col-md-4 col-lg-3">
+    <div class="logo_uploader">
+      <% if f.object.image.present? %>
+        <img src="<%= f.object.image.url %>" alt="img" class='image-upload'>
+      <% else %>
+        <%= image_tag "upload_icon.png", class: 'logo'%>
+      <% end %>
+    </div>
+    <div class="text-center">
+      <%= link_to_remove_association "Remove", f, class: "btn btn-link btn-sm remove-btn" %>
+    </div>
+      <%= f.file_field :image, class: 'image_uploader d-none'%>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    var imagesPreview = function(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          $(input)
+          .closest('.nested-fields')
+          .find('img')
+          .attr('src', event.target.result)
+          .css('width','150px')
+          .css('height', '100px');
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+    $('.image_uploader').off();
+    $('.image_uploader').on('change', function() {
+      $('.previewer').removeClass('d-none');
+      imagesPreview(this);
+    });
+  });
+  $('.logo_uploader').off();
+  $('.logo_uploader').click(function() {
+    $(this).closest('.nested-fields').find('.image_uploader').click();
+  });
+  $('.error-message').css('color','red').show();
+</script>

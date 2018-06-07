@@ -12,13 +12,23 @@
         <%= render 'picture_fields', :f => pic %>
       <% end %>
     </div>
+    <div class="row" id="add-cocoon-edit">
+
+    </div>
     <div class='links text-center'>
-      <%= link_to_add_association "Add a picture", f, :pictures, class: "btn btn-danger", id: 'link-edit'%>
+      <%= link_to_add_association "Add a picture", f, :pictures, class: "btn btn-link", id: 'link-edit'%>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" onclick="$('#link-edit').off();" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary save-button-js" >Save changes</button>
+    <button type="submit" class="btn btn-primary save-button-js">Save changes</button>
   </div>
 <% end %>
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#link-edit").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon-edit');
+  });
+</script>

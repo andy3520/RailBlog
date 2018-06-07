@@ -5,6 +5,9 @@
   <div class="justify-content-start ml-2 mess-buble">
     <div class="font-weight-bold"><%= comment.user.name %></div>
     <div class="comment-content"><%= comment.cmt %></div>
+    <div class="row pictures-render-comment">
+      <%= render partial: 'all_pic',locals: { comment: comment } %>
+    </div>
   </div>
 </div>
 <div class="row d-none comment-feature" id="comment_feature_<%= comment.id %>">
