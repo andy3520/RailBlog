@@ -8,6 +8,12 @@
   </div>
   <div class="form-group col-12 col-sm-9 col-md-10">
     <%= f.text_area :cmt, rows: "2",placeholder: "Enter your comment", class: "form-control"%>
+    <div class="row" id="add-cocoon-comment">
+
+    </div>
+    <div class='links'>
+      <%= link_to_add_association "Add a picture", f, :pictures, id: 'link-add-pic-comment'%>
+    </div>
   </div>
   <div class="form-group col-4 col-sm-3 col-md-2">
     <%= f.submit "Post", class: "btn btn-danger text-uppercase form-control btn-sm post-comment"%>
@@ -17,3 +23,10 @@
   </div>
 </div>
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#link-add-pic-comment").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon-comment');
+  });
+</script>

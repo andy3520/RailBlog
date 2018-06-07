@@ -24,6 +24,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
+      if params[:images]
+        params[:images].each { |image|
+          @comment.pictures.create(image: image)
+        }
+      end
       respond_to do |f|
         f.js {}
       end
@@ -66,7 +71,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.required(:comment).permit(:user_id, :post_id, :cmt)
+    params.required(:comment).permit(:user_id, :post_id, :cmt, pictures_attributes: [:id, :image, :_destroy])
   end
 
   def order_comments(page, item_num, list)

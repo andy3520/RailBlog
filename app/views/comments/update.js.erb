@@ -1,6 +1,9 @@
 <% if @error.nil? %>
-  up = $('#comment_num_<%= @comment.id %>').find('.comment-content');
-  up.html('<%= @comment.cmt %>');
+  cmt = $('#comment_num_<%= @comment.id %>').find('.comment-content');
+  cmt.html('<%= @comment.cmt %>');
+  pic = $('#comment_num_<%= @comment.id %>').find('.pictures-render-comment');
+  pic.empty();
+  pic.html('<%= j(render partial: 'all_pic', locals: { comment: @comment }) %>');
   $('#editPostModal').modal('hide');
   $('.cmt-error').html("").appendTo(".cmt-error");
 <% else %>

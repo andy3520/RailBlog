@@ -5,8 +5,26 @@
     <%= f.text_area :cmt, value: comment.cmt, rows: "2",placeholder: "Enter your comment", class: "form-control edit-comment-js"%>
   <div class="cmt-error"></div>
 </div>
+<div class="row" id="edit-cocoon-comment">
+  <%= f.fields_for :pictures do |pic| %>
+    <%= render 'picture_fields', :f => pic %>
+  <% end %>
+  </div>
+  <div class="row" id="add-cocoon-edit-comment">
+
+  </div>
+  <div class='links text-center'>
+    <%= link_to_add_association "Add a picture", f, :pictures, class: "btn btn-link", id: 'link-edit-comment'%>
+  </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  <button type="submit" class="btn btn-primary save-button-js" disabled="true">Save changes</button>
+  <button type="submit" class="btn btn-primary save-button-js">Save changes</button>
 </div>
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#link-edit-comment").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon-edit-comment');
+  });
+</script>

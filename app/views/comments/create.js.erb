@@ -5,6 +5,7 @@ empty_input = $('#post_number_<%= @comment.post_id %>').closest('.card').find("#
 <% if @error.nil? %>
   $("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment }) %>").prependTo(block);
   $(notice_nocmt).remove();
+  $('.remove-btn').click();
   $(empty_input).val("");
   error.html("").appendTo(error);
 <% else %>
@@ -15,3 +16,4 @@ empty_input = $('#post_number_<%= @comment.post_id %>').closest('.card').find("#
     error.html("").appendTo(error);
   <% end %>
 <% end %>
+
