@@ -1,8 +1,8 @@
 $('#editPostModal').modal('show','true');
 $('#editPostModalLabel').text('Edit post');
 $("#editPostForm").html("<%= escape_javascript(render partial: 'edit_post', locals: { post: @post_edit } ) %>");
-old_title=$(".post-title-js").val();
-old_content=$(".post-content-js").val();
+// old_title=$(".post-title-js").val();
+// old_content=$(".post-content-js").val();
 
 // $(".post-content-js , .post-title-js").keyup(function() {
 //   new_content=$('.post-content-js').val();
