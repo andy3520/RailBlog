@@ -1,1 +1,2 @@
 $('#avatarmodel').modal('show','true');
+$('.avatar-uploader').html("<%= j(render partial: 'avatar_fields', locals: { user: @user } ) %>")

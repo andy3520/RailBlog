@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :users do
     member do
       patch :avatar
+      patch :save_avatar
+      patch :cover
+      patch :save_cover
     end
   end
   resources :comments

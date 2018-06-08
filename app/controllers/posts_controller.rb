@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      if params[:images]
+      unless params[:images].nil?
         params[:images].each { |image|
           @post.pictures.create(image: image)
         }
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      if params[:images]
+      unless params[:images].nil?
         params[:images].each { |image|
           @post.pictures.update(image: image)
         }

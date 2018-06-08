@@ -1,32 +1,46 @@
-<% if logged_in? %>
-  <% provide(:title, @user.name) %>
-  <h1>User detail</h1>
-  <%= gravatar_for @user %>
-  <%= link_to "change avatar", avatar_user_path(current_user), remote: true, method: :PATCH %>
-  <br>
-  <%= @user.name %>
-  <br>
-  <%= @user.email %>
+ <div class="user-wall">
+  <% if logged_in? %>
+    <div class="cover row">
+      <%= image_tag @user.cover.url(:medium) , class: 'cover-pic'%>
+    </div>
+    <% provide(:title, @user.name) %>
+    <div class="avatar-container">
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar.url(:medium) , class: 'gravatar ml-5'%>
+      <% else %>
+        <div class="ml-5">
+          <%= gravatar_for @user %>
+        </div>
+      <% end %>
+      <% if current_user.id == @user.id %>
+        <br/>
+        <%= link_to "change avatar", avatar_user_path(@user), remote: true, method: :PATCH, class: 'ml-5 btn btn-avatar' %>
+      <% end %>
+    </div>
 
-<% else %>
-  <script type="text/javascript">
-    window.location.href="<%= root_path %>"
-  </script>
-<% end %>
-<div class="modal fade" id="avatarmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+    <br>
+    <%= @user.name %>
+    <br>
+    <%= @user.email %>
+
+  <% else %>
+    <script type="text/javascript">
+      window.location.href="<%= root_path %>"
+    </script>
+  <% end %>
+</div>
+<div class="modal fade" id="avatarmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-body">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+      <div class="modal-body">
         <div class="avatar-uploader">
 
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
