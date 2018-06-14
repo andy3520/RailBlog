@@ -9,10 +9,10 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", large: "500x500>" },
-  default_url: "/images/:style/missing.png"
+  default_url: "/images/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_attached_file :cover, styles: { medium: "300x300>", thumb: "100x100>", large: "500x500>" },
-  default_url: "/images/:style/missing.png"
+  default_url: "/system/images/cover-default.jpeg"
   validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_nil: true

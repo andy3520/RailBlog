@@ -1,33 +1,36 @@
- <div class="user-wall">
-  <% if logged_in? %>
-    <div class="cover row">
-      <%= image_tag @user.cover.url(:medium) , class: 'cover-pic'%>
-    </div>
-    <% provide(:title, @user.name) %>
-    <div class="avatar-container">
-      <% if @user.avatar.present? %>
-        <%= image_tag @user.avatar.url(:medium) , class: 'gravatar ml-5'%>
-      <% else %>
-        <div class="ml-5">
-          <%= gravatar_for @user %>
-        </div>
+ <div class="user-wall ">
+  <div class="container-fluid">
+    <% if logged_in? %>
+      <div class="cover row">
+        <%= image_tag @user.cover.url(:original) , class: 'cover-pic'%>
+      </div>
+      <% provide(:title, @user.name) %>
+      <div class="avatar-container">
+        <% if @user.avatar.present? %>
+          <%= image_tag @user.avatar.url(:medium) , class: 'gravatar ml-0 ml-md-5 img-thumbnail header-avatar'%>
+        <% else %>
+          <div class="ml-5 img-thumbnail">
+            <%= gravatar_for @user %>
+          </div>
+        <% end %>
+        <% if current_user.id == @user.id %>
+          <br/>
+          <%= link_to "change avatar", avatar_user_path(@user), remote: true, method: :PATCH, class: 'ml-0 ml-md-5 btn btn-avatar' %>
+          <%= link_to "change cover", cover_user_path(@user), remote: true, method: :PATCH, class: 'ml-0 ml-md-5 btn btn-cover' %>
+        <% end %>
+      </div>
+      <h1 class="user-name ml-0 ml-md-5"><%= @user.name %></h1>
+    <% else %>
+      <script type="text/javascript">
+        window.location.href="<%= root_path %>"
+      </script>
+    <% end %>
+    <div class="user-post">
+      <% @user.posts.each do |p| %>
+        <%= render p %>
       <% end %>
-      <% if current_user.id == @user.id %>
-        <br/>
-        <%= link_to "change avatar", avatar_user_path(@user), remote: true, method: :PATCH, class: 'ml-5 btn btn-avatar' %>
-      <% end %>
     </div>
-
-    <br>
-    <%= @user.name %>
-    <br>
-    <%= @user.email %>
-
-  <% else %>
-    <script type="text/javascript">
-      window.location.href="<%= root_path %>"
-    </script>
-  <% end %>
+  </div>
 </div>
 <div class="modal fade" id="avatarmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">

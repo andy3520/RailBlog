@@ -4,7 +4,11 @@
       <div class="row">
         <div class="justify-content-start ml-3">
           <span id="post_number_<%=post.id%>" />
-          <div class="user-avatar"><%= gravatar_for post.user %></div>
+          <% if post.user.avatar.present? %>
+            <div class="user-avatar"><%= image_tag post.user.avatar.url(:thumb), class: 'gravatar user-upload-avatar mini-post-avatar'%></div>
+          <% else %>
+            <div class="user-avatar"><%= gravatar_for post.user %></div>
+          <% end %>
         </div>
         <div class="justify-content-start ml-2">
           <div class="container">
@@ -23,7 +27,7 @@
     <h5 class="card-title font-weight-bold"><%= post.title %></h5>
     <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(post.created_at) %> ago</h6>
     <div class="row pictures-render">
-      <%= render partial: 'all_pic',locals: { post: post } %>
+      <%= render partial: 'posts/all_pic',locals: { post: post } %>
     </div>
     <p class="card-text"><%= post.content %></p>
   </div>

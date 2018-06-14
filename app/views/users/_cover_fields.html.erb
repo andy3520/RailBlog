@@ -1,0 +1,44 @@
+<%= form_for(@user, url: save_cover_user_path, html:{method: :patch},remote: true) do |f| %>
+<div class="logo_uploader row">
+  <% if f.object.cover.present? %>
+    <img src="<%= f.object.cover.url %>" alt="img" class='cover-upload'>
+  <% else %>
+    <%= image_tag @user.cover.url, class: 'cover-upload' %>
+  <% end %>
+</div>
+  <%= f.file_field :cover, class: 'image_uploader d-none'%>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary">Save</button>
+</div>
+<% end %>
+<script type="text/javascript">
+  $(function() {
+    var imagesPreview = function(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          $('.logo_uploader')
+          .find('img')
+          .attr('src', event.target.result)
+          .removeClass('gravatar')
+          .css('max-width', '490px')
+          .css('max-height', '300px')
+          .css('margin-right','auto')
+          .css('margin-left','auto');
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+    $('.image_uploader').off();
+    $('.image_uploader').on('change', function() {
+      $('.previewer').removeClass('d-none');
+      imagesPreview(this);
+    });
+  });
+  $('.logo_uploader').off();
+  $('.logo_uploader').click(function() {
+    $('.image_uploader').click();
+  });
+
+</script>
